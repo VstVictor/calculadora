@@ -8,11 +8,11 @@ from calc2 import sub
 layout =     [
                  [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num1')],
                  [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num2')],
-                 [psg.Text('******'), psg.Text('', key='adição'), psg.Text('******')],
-                 [psg.Text('******'), psg.Text('', key='subtração'), psg.Text('******')],
-                 [psg.Text('******'), psg.Text('', key='multiplicação'), psg.Text('******')],
-                 [psg.Text('******'), psg.Text('', key='divisão'), psg.Text('******')],
-                 [psg.Button('calcular'), psg.Button('limpar')],
+                 [psg.Text('Adição:'), psg.Text('', key='adição')],
+                 [psg.Text('Subtração:'), psg.Text('', key='subtração')],
+                 [psg.Text('Multiplicação:'), psg.Text('', key='multiplicação')],
+                 [psg.Text('Divisão:'), psg.Text('', key='divisão')],
+                 [psg.Button('calcular:'), psg.Button('limpar')],
              ]
 
 janela = psg.Window('calculadora simples', layout)
