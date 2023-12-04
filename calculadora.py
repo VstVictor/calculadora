@@ -2,7 +2,7 @@
 
 # Apresentação
 
-print('\n\t\t\t -- Calculadora de Soma --\n')
+print('\n\t\t\t -- Calculadora Simples --\n')
 
 # Entrada
 n1 = float(input('Informe N1: '))
