@@ -1,3 +1,5 @@
+# Interface Gráfica
+
 import PySimpleGUI as psg
 from calc2 import soma, sub, multi, div
 
