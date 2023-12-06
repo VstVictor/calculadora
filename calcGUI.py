@@ -1,40 +1,54 @@
-#interface gráfica
-
 import PySimpleGUI as psg
+from calc2 import soma, sub, multi, div
 
-import calc2
-from calc2 import sub
+layout = [
+    [psg.Text('Escolha a operação:')],
+    [psg.Radio('Adição', 'operacao', key='adição'), psg.Radio('Subtração', 'operacao', key='subtracao')],
+    [psg.Radio('Multiplicação', 'operacao', key='multiplicacao'), psg.Radio('Divisão', 'operacao', key='divisao')],
+    [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num1')],
+    [psg.Text('Informe o Segundo Número: '), psg.InputText(key='num2')],
+    [psg.Text('Resultado:'), psg.Text('', key='resultado')],
+    [psg.Button('Calcular'), psg.Button('Limpar')],
+]
 
-layout =     [
-                 [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num1')],
-                 [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num2')],
-                 [psg.Text('Adição:'), psg.Text('', key='adição')],
-                 [psg.Text('Subtração:'), psg.Text('', key='subtração')],
-                 [psg.Text('Multiplicação:'), psg.Text('', key='multiplicação')],
-                 [psg.Text('Divisão:'), psg.Text('', key='divisão')],
-                 [psg.Button('calcular:'), psg.Button('limpar')],
-             ]
-
-janela = psg.Window('calculadora simples', layout)
+janela = psg.Window('Calculadora Simples', layout)
 
 while True:
     evento, valores = janela.read()
+
     if evento == psg.WIN_CLOSED:
         break
-    elif evento == 'limpar':
-        janela['num1'].update('')
-        janela['num2'].update('')
-        janela['adição'].update('')
-        janela['subtração'].update('')
-        janela['multiplicação'].update('')
-        janela['divisão'].update('')
+    elif evento == 'Limpar':
+        for key in ['num1', 'num2', 'resultado']:
+            janela[key].update('')
         janela['num1'].set_focus()
-    else:
+    elif evento == 'Calcular':
         num1 = float(valores['num1'])
         num2 = float(valores['num2'])
-        janela ['adição'].update(calc2.soma(num1, num2))
-        janela ['subtração'].update(calc2.sub(num1, num2))
-        janela ['multiplicação'].update(calc2.multi(num1, num2))
-        janela ['divisão'].update(calc2.div(num1, num2))
+        operacao = None
+
+        for op in ['adição', 'subtracao', 'multiplicacao', 'divisao']:
+            if valores[op]:
+                operacao = op
+                break
+
+        if operacao is not None:
+            if operacao == 'adição':
+                resultado = soma(num1, num2)
+                [janela['resultado'].update(f'{num1} + {num2} = {resultado}')]
+            elif operacao == 'subtracao':
+                resultado = sub(num1, num2)
+                [janela['resultado'].update(f'{num1} - {num2} = {resultado}')]
+            elif operacao == 'multiplicacao':
+                resultado = multi(num1, num2)
+                [janela['resultado'].update(f'{num1} * {num2} = {resultado}')]
+            elif operacao == 'divisao':
+                if num2 != 0:
+                    resultado = div(num1, num2)
+                    janela['resultado'].update(f'{num1} / {num2} = {resultado}')
+                else:
+                    janela['resultado'].update(f'{num1} / {num2} = 0')
+        else:
+            psg.popup_error("Escolha uma operação antes de calcular!")
 
 janela.close()
