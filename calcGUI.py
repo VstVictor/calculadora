@@ -1,5 +1,4 @@
 # Interface Gráfica
-
 import PySimpleGUI as psg
 from calc2 import soma, sub, multi, div
 
@@ -10,7 +9,7 @@ layout = [
     [psg.Text('Informe o Primeiro Número: '), psg.InputText(key='num1')],
     [psg.Text('Informe o Segundo Número: '), psg.InputText(key='num2')],
     [psg.Text('Resultado:'), psg.Text('', key='resultado')],
-    [psg.Button('Calcular'), psg.Button('Limpar')],
+    [psg.Button('Calcular'), psg.Button('Limpar'), psg.Button('Sair', button_color=('white', 'red'))],
 ]
 
 janela = psg.Window('Calculadora Simples', layout)
@@ -18,7 +17,7 @@ janela = psg.Window('Calculadora Simples', layout)
 while True:
     evento, valores = janela.read()
 
-    if evento == psg.WIN_CLOSED:
+    if evento == psg.WIN_CLOSED or evento == 'Sair':
         break
     elif evento == 'Limpar':
         for key in ['num1', 'num2', 'resultado']:
@@ -61,7 +60,7 @@ while True:
                     resultado = div(num1, num2)
                     janela['resultado'].update(f'{num1} / {num2} = {resultado}')
                 else:
-                    janela['resultado'].update('Erro: Divisão por zero!')
+                    janela['resultado'].update(f'{num1} / {num2} = 0')
         else:
             psg.popup_error("Escolha uma operação antes de calcular!")
 
