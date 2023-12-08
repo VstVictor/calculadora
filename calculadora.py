@@ -9,7 +9,7 @@ while True:
     print('2. Subtração')
     print('3. Multiplicação')
     print('4. Divisão')
-    print('5. Sair')
+
 
     # Ler a opção do usuário
     op = int(input('\nOpção: '))
@@ -35,8 +35,8 @@ while True:
                 print(f'{n1} / {n2} = {total}')
             else:
                 print(f'{n1} / {n2} = 0')
-    elif op == 5:
-        print('Até Depois!')
+    resposta = input('Deseja realizar outra conversão? (s/n): ').lower()
+    if resposta != 's':
         break
     else:
         print(f'Opção {op} incorreta!')
